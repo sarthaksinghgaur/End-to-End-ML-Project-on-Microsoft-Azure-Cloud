@@ -4,6 +4,7 @@ import sys
 import numpy as np
 import pandas as pd
 import dill
+import pickle
 
 from sklearn.metrics import f1_score, precision_score, recall_score, roc_auc_score
 from sklearn.model_selection import RandomizedSearchCV, StratifiedKFold
@@ -68,6 +69,14 @@ def evaluate_models(X_train, y_train, X_test, y_test, models, param):
             logging.info(f"Hyperparameter Tuning done for : {model_name}")
 
         return report, trained_models
+
+    except Exception as e:
+        raise CustomException(e, sys)
+    
+def load_object(file_path):
+    try:
+        with open(file_path, "rb") as file_obj:
+            return pickle.load(file_obj)
 
     except Exception as e:
         raise CustomException(e, sys)
