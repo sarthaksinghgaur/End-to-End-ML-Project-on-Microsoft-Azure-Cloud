@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fraud Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            padding: 0;
+            margin: 0;
+            color: #fff;
+        }
+        .header {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            padding: 50px 20px 40px 20px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(255, 75, 43, 0.4);
+            border-radius: 0 0 28px 28px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            font-size: 2.8rem;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .header h2 {
+            margin: 0;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+        }
+        .container {
+            max-width: 530px;
+            margin: -50px auto 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 48px 42px 38px 42px;
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 1;
+            color: #222;
+        }
+        form label {
+            display: block;
+            margin: 20px 0 8px;
+            font-size: 1.12rem;
+            font-weight: 600;
+            color: #ff4b2b;
+            letter-spacing: 0.3px;
+            text-shadow: 0 1px 2px rgba(255, 75, 43, 0.5);
+        }
+        form input, form select {
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 16px;
+            border: 2px solid #ff4b2b;
+            font-size: 1.12rem;
+            margin-bottom: 6px;
+            background: #fff;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            font-family: inherit;
+            box-shadow: inset 0 2px 6px rgba(255,75,43,0.1);
+            cursor: pointer;
+        }
+        form input:hover, form select:hover {
+            border-color: #ff416c;
+            box-shadow: 0 0 8px rgba(255, 65, 108, 0.6);
+            background: #fff8f9;
+        }
+        form input:focus, form select:focus {
+            border: 2.5px solid #ff416c;
+            outline: none;
+            background: #fff0f3;
+            box-shadow: 0 0 12px rgba(255, 65, 108, 0.8);
+        }
+        .submit-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            margin-top: 30px;
+            padding: 18px 0;
+            width: 100%;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 1.25rem;
+            font-weight: 700;
+            box-shadow: 0 8px 25px rgba(255, 75, 43, 0.3);
+            transition: background 0.5s ease, box-shadow 0.4s ease, transform 0.3s ease;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.15);
+        }
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #ff6a85, #ff5a3c);
+            box-shadow: 0 14px 35px rgba(255, 90, 60, 0.45);
+            transform: translateY(-4px);
+        }
+        .result {
+            text-align: center;
+            font-size: 1.35rem;
+            margin-top: 36px;
+            color: #ff416c;
+            font-weight: 700;
+            letter-spacing: 0.15px;
+            padding: 16px 24px;
+            border: 2.5px solid #ff4b2b;
+            border-radius: 24px;
+            background: rgba(255, 75, 43, 0.1);
+            box-shadow: 0 6px 20px rgba(255, 75, 43, 0.2);
+            user-select: none;
+        }
+        small {
+            display: block;
+            color: #ff6a85;
+            font-size: 1rem;
+            margin-bottom: 0;
+            margin-top: 4px;
+            font-style: italic;
+            text-shadow: 0 1px 2px rgba(255, 65, 108, 0.3);
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 22px 12px 22px 12px;
+            }
+            .header {
+                padding: 38px 12px 28px 12px;
+                font-size: 2rem;
+            }
+            form label {
+                font-size: 1rem;
+            }
+            form input, form select {
+                font-size: 1rem;
+            }
+            .submit-btn {
+                font-size: 1.1rem;
+                padding: 14px 0;
+            }
+            .result {
+                font-size: 1.15rem;
+                padding: 14px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>Fraud Detection Form</h2>
+    </div>
+    <div class="container">
+        <form action="/predictdata" method="POST">
+            <label for="distance_from_home">Distance from Home</label>
+            <input type="number" step="0.01" name="distance_from_home" id="distance_from_home" required>
+            <small>Example: 0 to 10632</small>
+
+            <label for="distance_from_last_transaction">Distance from Last Transaction</label>
+            <input type="number" step="0.01" name="distance_from_last_transaction" id="distance_from_last_transaction" required>
+            <small>Example: 0 to 11851</small>
+
+            <label for="ratio_to_median_purchase_price">Ratio to Median Purchase Price</label>
+            <input type="number" step="0.01" name="ratio_to_median_purchase_price" id="ratio_to_median_purchase_price" required>
+            <small>Example: 0 to 267</small>
+
+            <label for="repeat_retailer">Repeat Retailer</label>
+            <select name="repeat_retailer" id="repeat_retailer" required>
+                <option value="">--Select--</option>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <label for="used_chip">Used Chip</label>
+            <select name="used_chip" id="used_chip" required>
+                <option value="">--Select--</option>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <label for="used_pin_number">Used PIN Number</label>
+            <select name="used_pin_number" id="used_pin_number" required>
+                <option value="">--Select--</option>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <label for="online_order">Online Order</label>
+            <select name="online_order" id="online_order" required>
+                <option value="">--Select--</option>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <button type="submit" class="submit-btn">Predict</button>
+        </form>
+
+        {% if results is defined %}
+        <div class="result">
+            <strong>Prediction:</strong> {{ "Fraudulent Transaction" if results == 1 else "Legitimate Transaction" }}
+        </div>
+        <div style="text-align: center; margin-top: 24px;">
+            <a href="/" class="submit-btn" style="width: auto; padding: 12px 28px; text-decoration: none;">Back to Home</a>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
