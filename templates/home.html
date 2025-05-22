@@ -154,15 +154,15 @@
         <form action="/predictdata" method="POST">
             <label for="distance_from_home">Distance from Home</label>
             <input type="number" step="0.01" name="distance_from_home" id="distance_from_home" required>
-            <small>Example: 0 to 10632</small>
+            <small>Distance between home and transaction location in km. Range: 0 to 10632</small>
 
             <label for="distance_from_last_transaction">Distance from Last Transaction</label>
             <input type="number" step="0.01" name="distance_from_last_transaction" id="distance_from_last_transaction" required>
-            <small>Example: 0 to 11851</small>
+            <small>Distance since the last transaction. Range: 0 to 11851 in km.</small>
 
             <label for="ratio_to_median_purchase_price">Ratio to Median Purchase Price</label>
             <input type="number" step="0.01" name="ratio_to_median_purchase_price" id="ratio_to_median_purchase_price" required>
-            <small>Example: 0 to 267</small>
+            <small>Ratio compared to median purchase price. Range: 0 to 267</small>
 
             <label for="repeat_retailer">Repeat Retailer</label>
             <select name="repeat_retailer" id="repeat_retailer" required>
@@ -170,6 +170,7 @@
                 <option value="0">No</option>
                 <option value="1">Yes</option>
             </select>
+            <small>Has the customer transacted with this retailer before?</small>
 
             <label for="used_chip">Used Chip</label>
             <select name="used_chip" id="used_chip" required>
@@ -177,6 +178,7 @@
                 <option value="0">No</option>
                 <option value="1">Yes</option>
             </select>
+            <small>Was a chip used in the card during the transaction?</small>
 
             <label for="used_pin_number">Used PIN Number</label>
             <select name="used_pin_number" id="used_pin_number" required>
@@ -184,6 +186,7 @@
                 <option value="0">No</option>
                 <option value="1">Yes</option>
             </select>
+            <small>Was a PIN number used to authorize the transaction?</small>
 
             <label for="online_order">Online Order</label>
             <select name="online_order" id="online_order" required>
@@ -191,6 +194,7 @@
                 <option value="0">No</option>
                 <option value="1">Yes</option>
             </select>
+            <small>Was this an online order?</small>
 
             <button type="submit" class="submit-btn">Predict</button>
         </form>
